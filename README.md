@@ -18,7 +18,7 @@
 
 ```
 CyberChef/
-├── CyberChef_launcher.py / CyberChef_Launcher.exe    ← 本脚本
+├── CyberChef_launcher.py / CyberChef_launcher.exe    ← 本脚本
 └── CyberChef_v11.4.0.html   ← CyberChef 离线版 HTML 文件（自行下载，不随仓库分发）
 ```
 
