@@ -25,7 +25,7 @@ CyberChef/
 
 ## 使用方法
 
-1. 直接从 [Releases](https://github.com/你的用户名/CyberChef_launcher/releases) 下载 `CyberChef_launcher.exe`。
+1. 直接从 [Releases](https://github.com/Thyme-13/CyberChef_launcher/releases) 下载 `CyberChef_launcher.exe`。
 
 2. 使用源码运行：
 
