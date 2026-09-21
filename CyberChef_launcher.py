@@ -3,6 +3,7 @@ import sys
 import subprocess
 import webbrowser
 import time
+import functools
 
 if sys.platform == 'win32':
     import ctypes
@@ -20,14 +21,33 @@ def show_error(message: str) -> None:
         print(f'[CyberChef Launcher] {message}', file=sys.stderr)
 
 
+def run_in_process(script_dir: str, p: int) -> None:
+    from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+    handler = functools.partial(SimpleHTTPRequestHandler, directory=script_dir)
+    httpd = ThreadingHTTPServer((BIND_ADDR, p), handler)
+    webbrowser.open(f'http://{BIND_ADDR}:{p}/{HTML_NAME}')
+    httpd.serve_forever()
+
+
 def main() -> int:
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    if getattr(sys, 'frozen', False):
+        script_dir = os.path.dirname(sys.executable)
+    else:
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+
     html_path = os.path.join(script_dir, HTML_NAME)
     if not os.path.isfile(html_path):
         show_error(f'HTML file not found: {HTML_NAME}')
         return 1
 
     for p in PORTS:
+        if getattr(sys, 'frozen', False):
+            try:
+                run_in_process(script_dir, p)
+            except OSError:
+                continue
+            return 0
+
         try:
             server = subprocess.Popen(
                 [sys.executable, '-m', 'http.server', '--bind', BIND_ADDR, '--directory', script_dir, str(p)],
@@ -53,7 +73,6 @@ def main() -> int:
             except KeyboardInterrupt:
                 server.terminate()
             return 0
-        server = None
 
     show_error(f'No available port (tried: {", ".join(map(str, PORTS))})')
     return 1
