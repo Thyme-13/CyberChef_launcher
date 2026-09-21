@@ -14,10 +14,10 @@
 
 ## 目录结构
 
-脚本所在目录放置 CyberChef 离线 HTML 文件：
+将脚本放置于`CyberChef`根目录下，与`CyberChef_v11.4.0.html`同级：
 
 ```
-CyberChef_launcher/
+CyberChef/
 ├── CyberChef_launcher.py    ← 本脚本
 └── CyberChef_v11.4.0.html   ← CyberChef 离线版 HTML 文件（自行下载，不随仓库分发）
 ```
