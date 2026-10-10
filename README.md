@@ -5,12 +5,12 @@
 
 ## 功能
 
-| 功能 | 说明 |
-|------|------|
-| 端口自适应 | 依次尝试 8000 / 5500 / 8080 / 8888 / 3000，首个能成功启动 HTTP 服务的端口即被采用 |
-| 仅本地回环 | 强制绑定 `127.0.0.1`，避免局域网意外暴露 |
-| 错误提示 | HTML 缺失、端口全占用、服务启动失败等通过弹窗提示（Windows `MessageBoxW`，非 Windows 回退 stderr） |
-| 自动打开浏览器 | 服务启动后自动访问 CyberChef 离线页面 |
+| 功能      | 说明                                                                     |
+|---------|------------------------------------------------------------------------|
+| 端口自适应   | 依次尝试 8000 / 5500 / 8080 / 8888 / 3000，首个能成功启动 HTTP 服务的端口即被采用           |
+| 仅本地回环   | 强制绑定 `127.0.0.1`，避免局域网意外暴露                                             |
+| 错误提示    | HTML 缺失、端口全占用、服务启动失败等通过弹窗提示（Windows `MessageBoxW`，非 Windows 回退 stderr） |
+| 自动打开浏览器 | 服务启动后自动访问 CyberChef 离线页面                                               |
 
 ## 目录结构
 
@@ -18,19 +18,21 @@
 
 ```
 CyberChef/
-├── CyberChef_launcher.py / CyberChef_Launcher.exe    ← 本脚本
-└── CyberChef_v11.4.0.html   ← CyberChef 离线版 HTML 文件（自行下载，不随仓库分发）
+├── CyberChef_launcher.py   * 标准版源码
+├── CyberChef_launcher_lightweight.py   * 轻量版源码
+└── CyberChef_v11.4.0.html   * CyberChef 离线版 HTML 文件（自行下载，不随仓库分发）
 ```
 
 
 ## 使用方法
 
-1. 直接从 [Releases](https://github.com/你的用户名/CyberChef_launcher/releases) 下载 `CyberChef_launcher.exe`。
+1. 直接从 [Releases](https://github.com/Thyme-13/CyberChef_launcher/releases) 下载 `CyberChef_launcher.exe`。
 
 2. 使用源码运行：
 
 ```cmd
-python CyberChef_launcher.py
+python CyberChef_launcher.py #（标准版，带报错弹窗提示）
+python CyberChef_launcher_lightweight.py #（轻量版，无报错弹窗）
 ```
 
 启动后自动打开浏览器访问 `http://127.0.0.1:<端口>/CyberChef_v11.4.0.html`。
@@ -51,10 +53,11 @@ PORTS = (8000, 5500, 8080, 8888, 3000)
 BIND_ADDR = '127.0.0.1'
 ```
 
-## 兼容性
+## 环境要求
 
-- 目标环境：Windows / macOS / Linux，Python 3.8+
-- 依赖：仅标准库（`os`、`sys`、`subprocess`、`time`、`webbrowser`，Windows 下另用 `ctypes`）
+- **操作系统**：Windows / macOS / Linux（标准版弹窗仅限 Windows）
+- **Python 版本**：3.8 及以上
+- **依赖**：仅标准库（`os`、`sys`、`subprocess`、`time`、`webbrowser`，Windows 下另用 `ctypes`）
 
 ## 许可
 
